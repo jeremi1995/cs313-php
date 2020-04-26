@@ -1,14 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" style="background-color:lightseagreen;">
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1 style="color:red">Hello World!</h1>
-    <div>
-        Welcome to CS 313 - Backend Development!
+    <meta name="Jeremy Duong's Home Page, About Jeremy Duong" content="width=device-width, initial-scale=1.0">
+    <title>Jeremy Duong's homepage</title>
+  </head>
+  <body>
+    <header>
+        <h1 style="font-family: Calibri (Body), Garamond, Arial, Cambria; font-size:45px">
+            Welcome to Jeremy Duong's Home Page!
+        </h1>
+    </header>
+    <hr />
+    <div id="intro">
+        <h2 style="font-size:40px">Introduction</h2>
+        <div id="avatar" style="text-align: center">
+            <img src="../resource/avatar3.jpg" alt="" width="300" height="433">
+            <br>
+        </div>
+        <p style="font-family: Garamond, Arial, Cambria; text-align:justify; font-size:25px">
+            Hello, my name is <b>Duong Duc Anh</b> (My family name is Duong).
+            Confusing name, right? That's why I go by <b>Jeremy</b> so it's easier 
+            for people to call me. I am from Viet Nam, and this is my 8th semester here at 
+            <a href="http://www.byui.edu"><b>Brigham Young University - Idaho</b></a>. 
+            My major is <b>Computer Science</b> because I enjoy working with the computer 
+            and create things with it. I'm not super good yet, but I hope I'll be 
+            good soon :)
+        </p>
+        <div id="contact">
+            <ul>
+                <!--I learned how to put link in button from https://www.w3docs.com/snippets/html/how-to-create-an-html-button-that-acts-like-a-link.html-->
+                <li><button style="font-size:25px" onclick="window.location.href='https://www.facebook.com/jeremibq'">Facebook</button></li>
+                <li><p style="font-size:25px"><b><i>Email</i></b>: jeremibq@gmail.com</p></li>
+            </ul>
+        </div>
     </div>
-</body>
+    <hr />
+    <div id="classSchedule">
+        <h2 style="font-size:40px">Class Schedule</h2>
+        <div id="scheduleDescription" style="font-size:25px">
+            <p>
+                Following is my class schedule and courses description. 
+                I'm only taking 12 credits so not too bad :)
+            </p>
+        </div>
+        <h3 style="font-size:35px"><b>Schedule:</b></h3>
+        <div id="schedule" style="text-align: center">
+            <img src="../resource/classSchedule.jpg" alt="" width="889" height="689">
+        </div>
+        <h3 style="font-size:35px"><b>Courses List:</b></h3>
+        <div id="table">
+            <table style="width:100%; text-align:left; font-size:30px">
+               <tr>
+                   <th>Course Code</th>
+                   <th>Course Name</th>
+                   <th>Section</th>
+                   <th>Time</th>
+                   <th>Location</th>
+               </tr>
+               <tr>
+                   <td>CS 308</td>
+                   <td>Technical Communication</td>
+                   <td>02</td>
+                   <td>MTWTh 10:15 - 11:15</td>
+                   <td>STC 385</td>
+               </tr>
+               <tr>
+                   <td>CS 213</td>
+                   <td>Web Engineering I</td>
+                   <td>02</td>
+                   <td>TTh 02:30 - 04:00</td>
+                   <td>STC 243</td>
+               </tr>
+               <tr>
+                   <td>FDHUM 214</td>
+                   <td>Modern Arts and Propaganda</td>
+                   <td>02</td>
+                   <td>MWF 11:30 - 12:30</td>
+                   <td>AUS 221</td>
+               </tr>
+               <tr>
+                   <td>MATH 330</td>
+                   <td>Engineering Statistics</td>
+                   <td>03</td>
+                   <td>MWF 02:00 - 03:00</td>
+                   <td>RKS 247</td>
+               </tr>
+            </table>
+        </div>
+        <br><br><br>
+        <h3 style="font-size:35px"><b>Course Description:</b></h3>
+        <div id="coursesDescription">
+            <ul>
+                <li>
+                    <p style="font-size:25px;"><b><u>CS 213 (Web Engineering I)</u></b>: 
+                        Internet and web basics, web fundamentals, web browsers, web servers, 
+                        and web terminology. This course teaches the concepts behind the fundamental 
+                        tools used for building client-side web applications. It emphasizes 
+                        client side programming standards and programming tools used to 
+                        create dynamic web applications.</p></li>
+                <li>
+                    <p style="font-size:25px;"><b><u>CS 308 (Technical Communication)</u></b>: 
+                        Technical writing and presentation to technical audiences; professional 
+                        communication including resumes' and job interview; collaboration.</p></li>
+                <li>
+                    <p style="font-size:25px;"><b><u>FDHUM 214 (Modern Arts and Propaganda)</u></b>: 
+                        This course will focus on the use of propaganda, art, and other forms 
+                        of persuasion starting with the Modern Era (approximately post-1860) 
+                        and continuing to the present. Students will experience this topic 
+                        through various social issues and cultural influences from around the 
+                        world, including the visual, performing, and literary arts. This 
+                        course emphasizes the development of aesthetic judgment and critical 
+                        thinking.</p></li>
+                <li>
+                    <p style="font-size:25px;"><b><u>MATH 330 (Engineering Statistics)</u></b>: 
+                        This course is an introduction to statistical methods for science and engineering. 
+                        Review of basic statistical concepts of central tendency, dispersion of data, 
+                        probability laws, hypothesis testing, and confidence intervals will be conducted. 
+                        This course introduces statistical process control, design of experiments, 
+                        statistical tolerance analysis, and concepts of six sigma quality.</p></li>
+            </ul>
+            <p style="text-align: right">
+                Source: <a href="http://www.byui.edu"> Brigham Young University - Idaho</a>
+            </p>
+        </div>
+    </div>
+    <hr />
+    <br><br><br>
+    <div id="back">
+        <button style="font-size:30px" onclick="window.location.href='../index.html'">CS 213 Assignments</button>
+    </div>
+  </body>
 </html>
