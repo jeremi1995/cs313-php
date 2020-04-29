@@ -1,0 +1,57 @@
+html {
+    background-color: rgba(116, 165, 255, 0.959);
+}
+
+header {
+    display: flex;
+    background-color: black;
+    
+    border: 1px solid black;
+    height: 3%;
+}
+
+h1 {
+    color: white;
+}
+
+div#bodyAll {
+    display: flex;
+    flex-direction: column;
+    
+    margin: 5% 10% auto 10%;
+    border: 1px solid black;
+}
+
+div#bodyText {
+    display: flex;
+    
+    margin: 2% 5% 2% 5%;
+    border: 1px solid black;
+}
+
+div.textDiv {
+    display: flex;
+    flex-direction: column;
+
+    background-color: rgba(149, 186, 255, 0.8);
+
+    margin: 3%;
+    border: 1px solid black;
+    padding: 1%;
+}
+
+div.textDiv:hover {
+    font-weight: bold;
+}
+
+div#divButton {
+    display: flex;
+    
+    border: 1px solid black;
+    justify-content: center;
+}
+
+button#button1 {
+    width: 100px;
+    height: 50px;
+}
