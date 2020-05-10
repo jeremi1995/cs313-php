@@ -1,0 +1,107 @@
+{
+    "ts1": {
+        "key": "ts1",
+        "name": "Red Ivanti Shirt",
+        "pictureLink": "../resource/assign03/tshirt/tshirt1.jpg"
+    },
+    "ts2": {
+        "key": "ts2",
+        "name": "Blue Lucid Shirt",
+        "pictureLink": "../resource/assign03/tshirt/tshirt2.jpg"
+    },
+    "ts3": {
+        "key": "ts3",
+        "name": "Grey 39 Shirt",
+        "pictureLink": "../resource/assign03/tshirt/tshirt3.jpg"
+    },
+    "ts4": {
+        "key": "ts4",
+        "name": "Grey Shirt",
+        "pictureLink": "../resource/assign03/tshirt/tshirt4.jpg"
+    },
+    "s1": {
+        "key": "s1",
+        "name": "Long Sleeves White Shirt",
+        "pictureLink": "../resource/assign03/buttonupshirt/button1.jpg"
+    },
+    "s2": {
+        "key": "s2",
+        "name": "Long Sleeves Green Shirt",
+        "pictureLink": "../resource/assign03/buttonupshirt/button2.jpg"
+    },
+    "s3": {
+        "key": "s3",
+        "name": "Green Plaid Shirt",
+        "pictureLink": "../resource/assign03/buttonupshirt/button3.jpg"
+    },
+    "s4": {
+        "key": "s4",
+        "name": "Black Long Sleeves Shirt",
+        "pictureLink": "../resource/assign03/buttonupshirt/button4.jpg"
+    },
+    "s5": {
+        "key": "s5",
+        "name": "White/Blue Plaid Shirt",
+        "pictureLink": "../resource/assign03/buttonupshirt/button5.jpg"
+    },
+    "p1": {
+        "key": "p1",
+        "name": "Slacks",
+        "pictureLink": "../resource/assign03/pants/pants1.jpg"
+    },
+    "p2": {
+        "key": "p2",
+        "name": "Black Jeans",
+        "pictureLink": "../resource/assign03/pants/pants2.jpg"
+    },
+    "ti1": {
+        "key": "ti1",
+        "name": "Paisley Tie",
+        "pictureLink": "../resource/assign03/tie/tie1.jpg"
+    },
+    "ti2": {
+        "key": "ti2",
+        "name": "Red-X Tie",
+        "pictureLink": "../resource/assign03/tie/tie2.jpg"
+    },
+    "ti3": {
+        "key": "ti3",
+        "name": "White/Blue Floral Tie",
+        "pictureLink": "../resource/assign03/tie/tie3.jpg"
+    },
+    "ss1": {
+        "key": "ss1",
+        "name": "Snow Boots",
+        "pictureLink": "../resource/assign03/shoes/shoes1.jpg"
+    },
+    "ss2": {
+        "key": "ss2",
+        "name": "Black Church Shoes",
+        "pictureLink": "../resource/assign03/shoes/shoes2.jpg"
+    },
+    "ss3": {
+        "key": "ss3",
+        "name": "Brown Church Shoes",
+        "pictureLink": "../resource/assign03/shoes/shoes3.jpg"
+    },
+    "ss4": {
+        "key": "ss4",
+        "name": "Tall Black Church Shoes",
+        "pictureLink": "../resource/assign03/shoes/shoes4.jpg"
+    },
+    "ss5": {
+        "key": "ss5",
+        "name": "Black Nike Sport Shoes",
+        "pictureLink": "../resource/assign03/shoes/shoes5.jpg"
+    },
+    "hd1": {
+        "key": "hd1",
+        "name": "Heron Hoodie",
+        "pictureLink": "../resource/assign03/hoodie/hoodie1.jpg"
+    },
+    "hd2": {
+        "key": "hd2",
+        "name": "Grey Hoodie",
+        "pictureLink": "../resource/assign03/hoodie/hoodie2.jpg"
+    }
+}

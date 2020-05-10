@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../.css/week03/assign03-items.css">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <title>Shopping Site</title>
 </head>
@@ -30,7 +32,7 @@
                     <a class="nav-link" href="assign03-shoes.php">Shoes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="assign03-hoodies.php">Hoodies</a>
+                    <a class="nav-link active" href="assign03-hoodies.php">Hoodies</a>
                 </li>
             </ul>
             <form class="form-inline" action="cart.php" method="POST">
@@ -41,21 +43,25 @@
 
     <div class="container">
         <br><br>
-        <div class="row">
-            <div class="col-sm-4 col-md-4">
-                <img src="../resource/avatar3.jpg" alt="" width="300" height="433">
+        Hoodies
+        <div class="row mx-auto">
+            <div class="item-container col-md-3 mx-2 my-2">
+                <img class="item" src="../resource/assign03/hoodie/hoodie1.jpg" alt="">
+                <form action="cart.php" method="POST">
+                    Heron Hoodie - $9:99<br>
+                    <input type="hidden" value="hd1" name="itemToCart">
+                    <button type="submit" class="btn btn-primary btn-sm">Add to cart</button>
+                </form>
             </div>
-            <div class="col-sm-8 col-md-8">
-                <h2>Welcome to myClothes!</h2>
-                <p>This is where I sell my high quality used clothes :)</p>
+            <div class="item-container col-md-3 mx-2 my-2">
+                <img class="item" src="../resource/assign03/hoodie/hoodie2.jpg" alt="">
+                <form action="cart.php" method="POST">
+                    Grey Hoodie - $9:99<br>
+                    <input type="hidden" value="hd2" name="itemToCart">
+                    <button type="submit" class="btn btn-primary btn-sm">Add to cart</button>
+                </form>
             </div>
         </div>
-    </div>
-
-    <div class="container"  id="pageFooter">
-        <footer>
-            <p>Copyright ©2020</p>
-        </footer>
     </div>
 
     <!--Bootstrap javascript files-->

@@ -5,17 +5,29 @@ if (isset($_POST["deleteCart"])) {
 
     $cart = array();
     if (isset($_COOKIE["myCart"])) {
-        $cart = json_decode($_COOKIE["myCart"]);
+        $cart = json_decode($_COOKIE["myCart"], true);
     }
 
-    $newItem = "";
     if (isset($_POST["itemToCart"])) {
         $newItem = $_POST["itemToCart"];
-    }
-
-    if ($newItem != "") {
         array_push($cart, $newItem);
     }
+
+    if (isset($_POST["deletedItem"]) && isset($_POST["deletedIndex"])) {
+        $deletedItem = $_POST["deletedItem"];
+        $deletedIndex = $_POST["deletedIndex"];
+
+        $newArray = array();
+        $i = 0;
+        foreach ($cart as $item) {
+            if ($item != $deletedItem || $i != $deletedIndex) {
+                array_push($newArray, $item);
+            }
+            $i++;
+        }
+        $cart = $newArray;
+    }
+
     setcookie("myCart", json_encode($cart), time() + (86400 * 30), "/");
 }
 ?>
@@ -28,7 +40,7 @@ if (isset($_POST["deleteCart"])) {
 
     <link rel="stylesheet" href="../.css/week03/assign03-items.css">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <title>Shopping Site</title>
+    <title>myCart</title>
 </head>
 
 <body>
@@ -67,93 +79,105 @@ if (isset($_POST["deleteCart"])) {
         <?php
         if (isset($cart) && !empty($cart)) {
             echo "<div class='row mx-auto'>";
+            $j = 0;
             foreach ($cart as $item) {
                 $itemName = "";
                 $itemPictureLink = "";
                 switch ($item) {
+                        //T-Shirts
                     case ("ts1"):
                         $itemName = "Red Ivanti Shirt";
                         $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
                         break;
                     case ("ts2"):
-                        $itemName = "Red Ivanti Shirt";
+                        $itemName = "Blue Lucid Shirt";
                         $itemPictureLink = "../resource/assign03/tshirt/tshirt2.jpg";
                         break;
                     case ("ts3"):
-                        $itemName = "Red Ivanti Shirt";
+                        $itemName = "Grey 39 Shirt";
                         $itemPictureLink = "../resource/assign03/tshirt/tshirt3.jpg";
                         break;
                     case ("ts4"):
-                        $itemName = "Red Ivanti Shirt";
+                        $itemName = "Grey Shirt";
                         $itemPictureLink = "../resource/assign03/tshirt/tshirt4.jpg";
                         break;
+
+                        //Shirts
                     case ("s1"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Long Sleeves White Shirt";
+                        $itemPictureLink = "../resource/assign03/buttonupshirt/button1.jpg";
                         break;
                     case ("s2"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Long Sleeves Green Shirt";
+                        $itemPictureLink = "../resource/assign03/buttonupshirt/button2.jpg";
                         break;
                     case ("s3"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Green Plaid Shirt";
+                        $itemPictureLink = "../resource/assign03/buttonupshirt/button3.jpg";
                         break;
                     case ("s4"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Black Long Sleeves Shirt";
+                        $itemPictureLink = "../resource/assign03/buttonupshirt/button4.jpg";
                         break;
                     case ("s5"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "White/Blue Plaid Shirt";
+                        $itemPictureLink = "../resource/assign03/buttonupshirt/button5.jpg";
                         break;
+
+                        //Pants
                     case ("p1"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Slack";
+                        $itemPictureLink = "../resource/assign03/pants/pants1.jpg";
                         break;
                     case ("p2"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Black Jeans";
+                        $itemPictureLink = "../resource/assign03/pants/pants2.jpg";
                         break;
+
+                        //Shoes
                     case ("ss1"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Snow Boots";
+                        $itemPictureLink = "../resource/assign03/shoes/shoes1.jpg";
                         break;
                     case ("ss2"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Black Church Shoes";
+                        $itemPictureLink = "../resource/assign03/shoes/shoes2.jpg";
                         break;
                     case ("ss3"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Brown Church Shoes";
+                        $itemPictureLink = "../resource/assign03/shoes/shoes3.jpg";
                         break;
                     case ("ss4"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Tall Black Church Shoes";
+                        $itemPictureLink = "../resource/assign03/shoes/shoes4.jpg";
                         break;
                     case ("ss5"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Black Nike Sport Shoes";
+                        $itemPictureLink = "../resource/assign03/shoes/shoes5.jpg";
                         break;
+
+                        //Hoodies
                     case ("hd1"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Heron Hoodie";
+                        $itemPictureLink = "../resource/assign03/hoodie/hoodie1.jpg";
                         break;
                     case ("hd2"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Grey Hoodie";
+                        $itemPictureLink = "../resource/assign03/hoodie/hoodie2.jpg";
                         break;
+
+                        //Ties:
                     case ("ti1"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Paisley Tie";
+                        $itemPictureLink = "../resource/assign03/tie/tie1.jpg";
                         break;
                     case ("ti2"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "Red-X Tie";
+                        $itemPictureLink = "../resource/assign03/tie/tie2.jpg";
                         break;
                     case ("ti3"):
-                        $itemName = "Red Ivanti Shirt";
-                        $itemPictureLink = "../resource/assign03/tshirt/tshirt1.jpg";
+                        $itemName = "White/Blue Floral Tie";
+                        $itemPictureLink = "../resource/assign03/tie/tie3.jpg";
                         break;
                     default;
                         break;
@@ -162,10 +186,12 @@ if (isset($_POST["deleteCart"])) {
                            <img class="item" src="' . $itemPictureLink . '" alt="">
                            <form action="cart.php" method="POST">
                                 ' . $itemName . ' - $9.99<br>
-                                <input type="hidden" value="' . $item . '" name="itemToCart">
+                                <input type="hidden" value="' . $item . '" name="deletedItem">
+                                <input type="hidden" value="' . $j . '" name="deletedIndex">
                                 <button type="submit" class="btn btn-danger btn-sm">Remove from cart</button>
                            </form>
                       </div>';
+                $j++;
             }
             echo "</div>";
         } else {
@@ -173,10 +199,24 @@ if (isset($_POST["deleteCart"])) {
         }
         ?>
         <br>
-        <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <input type="hidden" value="yes" name="deleteCart">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">empty cart</button>
-        </form>
+        <?php
+        if (isset($cart) && !empty($cart)) {
+        echo '<form class="form-inline float-right" action="checkout.php" method="POST">
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Continue checkout</button>
+              </form>
+              <form class="form-inline" action="' .  htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="POST">
+                <input type="hidden" value="yes" name="deleteCart">
+                <button class="btn btn-warning my-2 my-sm-0" type="submit">Empty cart</button>
+              </form>
+             ';
+        }
+        ?>
+    </div>
+
+    <div class="container"  id="pageFooter">
+        <footer>
+            <p>Copyright ©2020</p>
+        </footer>
     </div>
 
     <!--Bootstrap javascript files-->
