@@ -4,6 +4,7 @@ require "../db/database.php";
 $db = getDB();
 $statement = $db->prepare("SELECT * FROM users");
 //$statement->bindValue(':user_id', $user_id);
+$statement->execute();
 
  while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
     // The variable "row" now holds the complete record for that
