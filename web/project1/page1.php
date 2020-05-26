@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+//database loading
+require "../db/database.php";
+$db = getDB();
+
 //if an user_name is given to the page, set user_name session variable
 if (isset($_POST["user_name"])) {
     $_SESSION["user_name"] = $_POST["user_name"];
@@ -17,7 +22,7 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <title>Shopping Site</title>
+    <title>Profile</title>
 </head>
 
 <body>
@@ -27,14 +32,14 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
             <a class="navbar-brand mb-0 h1 text-dark" href="main.php">myScriptures</a>
             <ul class="navbar-nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="page1.php">page1</a>
+                    <a class="nav-link" href="page1.php">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="page2.php">page2</a>
+                    <a class="nav-link" href="page2.php">Notes</a>
                 </li>
             </ul>
             <form class="form-inline" action="main.php" method="POST">
-                Hello, <?php echo $_SESSION["user_name"]; ?>! <br>
+                Hello, <?php echo $_SESSION["first_name"] . " " . $_SESSION["last_name"]; ?>! <br>
                 <input type="hidden" name="log_out" value="true">
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Log Out</button>
             </form>
@@ -45,14 +50,23 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
         <br><br>
         <div class="row">
             <div class="col-sm-4 col-md-4">
-                <img src="../resource/avatar3.jpg" alt="" width="300" height="433">
+                <img src="../resource/project1/gold_plates.jpg" alt="" width="350" height="350">
             </div>
             <div class="col-sm-8 col-md-8">
-                <h2>Welcome to myClothes!</h2>
-                <p>This is where I sell my high quality used clothes :)</p>
-                <p>
-                    User name: <?php echo "page 1: "; ?>
-                </p>
+                <table class="table">
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">First name</th>
+                        <th scope="col">Last name</th>
+                        <th scope="col">Date of Birth</th>
+                    </tr>
+                    <tr>
+                        <td><?php echo $_SESSION["user_name"];?></td>
+                        <td><?php echo $_SESSION["first_name"];?></td>
+                        <td><?php echo $_SESSION["last_name"];?></td>
+                        <td><?php echo $_SESSION["date_of_birth"];?></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

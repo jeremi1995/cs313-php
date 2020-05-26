@@ -16,19 +16,23 @@ if (isset($_POST["user_name"]) && isset($_POST["password"])) {
     $stmt1->bindValue(":pw", $_POST["password"], PDO::PARAM_STR);
     $stmt1->execute();
 
-    $users = $stmt1->fetchAll();
+    $user = $stmt1->fetch(PDO::FETCH_ASSOC);
 
-    if (empty($users)) {
+    if (empty($user)) {
         $loginError = true;
     } else {
         $_SESSION["user_name"] = $_POST["user_name"];
+        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["first_name"] = $user["first_name"];
+        $_SESSION["last_name"] = $user["last_name"];
+        $_SESSION["date_of_birth"] = $user["date_of_birth"];
         $loginError = false;
     }
 }
 
-//if the log_out signal is given, unset the user_name variable
+//if the log_out signal is given, unset everything
 if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
-    unset($_SESSION["user_name"]);
+    session_unset();
 }
 ?>
 
@@ -39,7 +43,7 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <title>Shopping Site</title>
+    <title>MyScriptures</title>
 </head>
 
 <body>
@@ -51,10 +55,10 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
             if (isset($_SESSION["user_name"])) {
                 echo '<ul class="navbar-nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="page1.php">page1</a>
+                    <a class="nav-link" href="page1.php">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="page2.php">page2</a>
+                    <a class="nav-link" href="page2.php">Notes</a>
                 </li>
             </ul>';
             }
@@ -71,7 +75,7 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
                   </form>';
             } else {
                 echo '<form class="form-inline" action="main.php" method="POST">
-                Hello, ' . $_SESSION["user_name"] . '! <br>' .
+                Hello, ' . $_SESSION["first_name"] . " " . $_SESSION["last_name"] . '! <br>' .
                     '<input type="hidden" name="log_out" value="true">
                            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Log Out</button>
                       </form>';
@@ -84,16 +88,15 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
         <br><br>
         <div class="row">
             <div class="col-sm-4 col-md-4">
-                <img src="../resource/avatar3.jpg" alt="" width="300" height="433">
+                <img src="../resource/project1/gold_plates.jpg" alt="" width="350" height="350">
             </div>
             <div class="col-sm-8 col-md-8">
-                <h2>Welcome to myClothes!</h2>
-                <p>This is where I sell my high quality used clothes :)</p>
-                <p>
-                    User name: <?php
-                                echo "main";
-                                ?>
-                </p>
+            <h2>Welcome to myScriptures!</h2>
+                <p>This is where you can create notes for your scriptures study</p>
+                <?php
+                if (!isset($_SESSION["user_name"]))
+                echo "<p>Please sign in using your username and password</p>"
+                ?>
             </div>
         </div>
     </div>

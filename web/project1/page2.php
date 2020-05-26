@@ -1,5 +1,17 @@
 <?php
 session_start();
+
+//database loading
+require "../db/database.php";
+$db = getDB();
+$user_id = $_SESSION["user_id"];
+
+//Preparing all the notes from the current user
+$stmt = $db->prepare("SELECT * FROM note as n join book as b on n.book_id = b.id WHERE user_id=:ui");
+$stmt->bindValue(":ui", $user_id);
+$stmt->execute();
+
+
 //if an user_name is given to the page, set user_name session variable
 if (isset($_POST["user_name"])) {
     $_SESSION["user_name"] = $_POST["user_name"];
@@ -17,7 +29,7 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <title>Shopping Site</title>
+    <title>Notes</title>
 </head>
 
 <body>
@@ -27,14 +39,14 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
             <a class="navbar-brand mb-0 h1 text-dark" href="main.php">myScriptures</a>
             <ul class="navbar-nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="page1.php">page1</a>
+                    <a class="nav-link" href="page1.php">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="page2.php">page2</a>
+                    <a class="nav-link" href="page2.php">Notes</a>
                 </li>
             </ul>
             <form class="form-inline" action="main.php" method="POST">
-                Hello, <?php echo $_SESSION["user_name"]; ?>! <br>
+                Hello, <?php echo $_SESSION["first_name"] . " " . $_SESSION["last_name"]; ?>! <br>
                 <input type="hidden" name="log_out" value="true">
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Log Out</button>
             </form>
@@ -45,12 +57,26 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
         <br><br>
         <div class="row">
             <div class="col-sm-4 col-md-4">
-                <img src="../resource/avatar3.jpg" alt="" width="300" height="433">
+                <img src="../resource/project1/gold_plates.jpg" alt="" width="350" height="350">
             </div>
             <div class="col-sm-8 col-md-8">
-                <h2>Welcome to myScriptures!</h2>
-                <p>This is where you can create notes for your scriptures study</p>
-                <p>Please sign in using your username and password</p>
+                <table class="table">
+                    <tr>
+                        <th scope="col">Scripture</th>
+                        <th scope="col">Verse Content</th>
+                        <th scope="col">Note Content</th>
+                    </tr>
+                    <?php
+                    //Each row is a note
+                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr>
+                        <td>" . $row["book_name"] . " " . $row["chapter"] . ":" . $row["verse"] ."</td>
+                        <td>" . $row["verse_content"] . "</td>
+                        <td>" . $row["note_content"] . "</td>
+                    </tr>";
+                    }
+                    ?>
+                </table>
             </div>
         </div>
     </div>
