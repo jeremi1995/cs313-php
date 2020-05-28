@@ -7,7 +7,10 @@ $db = getDB();
 $user_id = $_SESSION["user_id"];
 
 //Preparing all the notes from the current user
-$stmt = $db->prepare("SELECT * FROM note as n join book as b on n.book_id = b.id WHERE user_id=:ui");
+$stmt = $db->prepare("SELECT * FROM note as n
+                               JOIN book as b 
+                               ON n.book_id = b.id
+                               WHERE user_id=:ui");
 $stmt->bindValue(":ui", $user_id);
 $stmt->execute();
 
