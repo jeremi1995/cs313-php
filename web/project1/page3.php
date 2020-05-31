@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
- *   PROFILE INFO PAGE
-*    Notice: This page is only available to the users after
+*    ADD NOTES PAGE
+*    - Notice: This page is only available to the users after
 *    signing in
 ************************************************************/
 session_start();
@@ -9,7 +9,20 @@ session_start();
 //database loading
 require "../db/database.php";
 $db = getDB();
+$user_id = $_SESSION["user_id"]; //This only works if the user logged in
 
+//Preparing all the notes from the current user
+$stmt = $db->prepare("SELECT * FROM note as n
+                               JOIN book as b 
+                               ON n.book_id = b.id
+                               WHERE user_id=:ui");
+$stmt->bindValue(":ui", $user_id);
+$stmt->execute();
+
+//if the log_out signal is given, unset the user_name variable
+if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
+    unset($_SESSION["user_name"]);
+}
 ?>
 
 <?php
@@ -24,7 +37,7 @@ $db = getDB();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <title>Profile</title>
+    <title>Notes</title>
 </head>
 
 <body>
@@ -60,17 +73,20 @@ $db = getDB();
             <div class="col-sm-8 col-md-8">
                 <table class="table">
                     <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">First name</th>
-                        <th scope="col">Last name</th>
-                        <th scope="col">Date of Birth</th>
+                        <th scope="col">Scripture</th>
+                        <th scope="col">Verse Content</th>
+                        <th scope="col">Note Content</th>
                     </tr>
-                    <tr>
-                        <td><?php echo $_SESSION["user_name"];?></td>
-                        <td><?php echo $_SESSION["first_name"];?></td>
-                        <td><?php echo $_SESSION["last_name"];?></td>
-                        <td><?php echo $_SESSION["date_of_birth"];?></td>
-                    </tr>
+                    <?php
+                    //Each row is a note
+                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr>
+                        <td>" . $row["book_name"] . " " . $row["chapter"] . ":" . $row["verse"] ."</td>
+                        <td>" . $row["verse_content"] . "</td>
+                        <td>" . $row["note_content"] . "</td>
+                    </tr>";
+                    }
+                    ?>
                 </table>
             </div>
         </div>

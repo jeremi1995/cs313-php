@@ -1,30 +1,31 @@
 <?php
+/***********************************************************
+ *   DISPLAY NOTES PAGE
+*    Notice: This page is only available to the users after
+*    signing in
+************************************************************/
 session_start();
 
 //database loading
 require "../db/database.php";
 $db = getDB();
-$user_id = $_SESSION["user_id"];
+$user_id = $_SESSION["user_id"]; //This only works if the user logged in
 
 //Preparing all the notes from the current user
-$stmt = $db->prepare("SELECT * FROM note as n
-                               JOIN book as b 
-                               ON n.book_id = b.id
-                               WHERE user_id=:ui");
+$stmt = $db->prepare("SELECT n.id, user_id, book_id, volume, book_name, chapter, verse, verse_content, note_content 
+                             FROM note as n 
+                             JOIN book as b 
+                             ON n.book_id = b.id WHERE user_id =:ui");
 $stmt->bindValue(":ui", $user_id);
 $stmt->execute();
 
-
-//if an user_name is given to the page, set user_name session variable
-if (isset($_POST["user_name"])) {
-    $_SESSION["user_name"] = $_POST["user_name"];
-}
-//if the log_out signal is given, unset the user_name variable
-if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
-    unset($_SESSION["user_name"]);
-}
 ?>
 
+<?php
+/*********************************************************
+* PAGE HTML PRESENTATION
+**********************************************************/
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,6 +48,9 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
                 <li class="nav-item">
                     <a class="nav-link" href="page2.php">Notes</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="page3.php">+Add notes</a>
+                </li>
             </ul>
             <form class="form-inline" action="main.php" method="POST">
                 Hello, <?php echo $_SESSION["first_name"] . " " . $_SESSION["last_name"]; ?>! <br>
@@ -68,14 +72,21 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
                         <th scope="col">Scripture</th>
                         <th scope="col">Verse Content</th>
                         <th scope="col">Note Content</th>
+                        <th scope="col">Options</th>
                     </tr>
                     <?php
                     //Each row is a note
                     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>
-                        <td>" . $row["book_name"] . " " . $row["chapter"] . ":" . $row["verse"] ."</td>
-                        <td>" . $row["verse_content"] . "</td>
-                        <td>" . $row["note_content"] . "</td>
+                        <td id='bo_" . $row["id"]."'>" . $row["book_name"] . " " . $row["chapter"] . ":" . $row["verse"] ."</td>
+                        <td id='vc_" . $row["id"]."'>" . $row["verse_content"] . "</td>
+                        <td id='nc_" . $row["id"]."'>" . $row["note_content"] . "</td>
+                        <td>
+                        <div id='edit_options_" . $row["id"] . "'>
+                            <button class='btn btn-primary btn-sm' type='button' onclick='editNote(" . $row["id"] . ", 1)'>Edit</button>
+                        </div>
+                        <button class='btn btn-danger btn-sm' type='button' onclick='deleteNote(" . $row["id"] . ")'>Delete</button>
+                        </td>
                     </tr>";
                     }
                     ?>
@@ -90,6 +101,7 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
         </footer>
     </div>
 
+    <script src="page2.js"></script>
     <!--Bootstrap javascript files-->
     <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

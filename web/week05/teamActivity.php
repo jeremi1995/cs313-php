@@ -84,22 +84,22 @@ if (
                 <h2>Insert Your Scripture</h2>
                 <form action="teamActivity.php" method="POST">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Book" name="book" required>
+                        <input type="text" class="form-control" placeholder="Book" name="book" id="in_book" required>
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" placeholder="Chapter" name="chapter" required>
+                        <input type="number" class="form-control" placeholder="Chapter" name="chapter" id="in_chapter" required>
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" placeholder="Verse" name="verse" required>
+                        <input type="number" class="form-control" placeholder="Verse" name="verse" id="in_verse" required>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Verse content..." name="content" required></textarea>
+                        <textarea class="form-control" placeholder="Verse content..." name="content" id="in_content" required></textarea>
                     </div>
                     <?php
                     $inputIndex = 0;
                     while ($topic = $statement1->fetch(PDO::FETCH_ASSOC)) {
                         echo '<div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="topic' . $inputIndex . '" name="topics[]" value="' . $topic["id"] . '">
+                        <input type="checkbox" class="form-check-input in_topics" id="topic' . $inputIndex . '" name="topics[]" value="' . $topic["id"] . '">
                         <label class="form-check-label" for="topic' . $inputIndex . '">' . $topic["name"] . '</label>
                       </div>';
                         $inputIndex++;
@@ -112,7 +112,7 @@ if (
                     <div class="form-group">
                         <input type="text" class="form-control" name="newTopic" id="newTopic" placeholder="New topic" disabled>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-primary" id="mySubmitButton">Submit</button>
                 </form>
             </div>
             <div class="col-sm-8 col-md-8">

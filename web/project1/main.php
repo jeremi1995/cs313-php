@@ -1,4 +1,8 @@
 <?php
+/***********************************************************
+ *   MAIN PAGE
+*    Available to all users
+************************************************************/
 session_start();
 
 //some variables
@@ -60,11 +64,18 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
                 <li class="nav-item">
                     <a class="nav-link" href="page2.php">Notes</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="page3.php">+Add notes</a>
+                </li>
             </ul>';
             }
             ?>
             <?php
+            //If an user is in session, display login info on top right of the screen
+            // Otherwise, display log-in username and password fields
             if (!isset($_SESSION["user_name"])) {
+                //If the provided username and password are incorrect, display
+                //  warning message
                 if ($loginError) {
                     echo '<p class="text-danger">Incorrect username or password</p>';
                 }
