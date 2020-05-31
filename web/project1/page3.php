@@ -11,18 +11,10 @@ require "../db/database.php";
 $db = getDB();
 $user_id = $_SESSION["user_id"]; //This only works if the user logged in
 
-//Preparing all the notes from the current user
-$stmt = $db->prepare("SELECT * FROM note as n
-                               JOIN book as b 
-                               ON n.book_id = b.id
-                               WHERE user_id=:ui");
-$stmt->bindValue(":ui", $user_id);
+//Preparing all the books from the database
+$stmt = $db->prepare("SELECT * FROM book;");
 $stmt->execute();
 
-//if the log_out signal is given, unset the user_name variable
-if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
-    unset($_SESSION["user_name"]);
-}
 ?>
 
 <?php
@@ -37,7 +29,7 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <title>Notes</title>
+    <title>Add Notes</title>
 </head>
 
 <body>
@@ -71,23 +63,31 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
                 <img src="../resource/project1/gold_plates.jpg" alt="" width="350" height="350">
             </div>
             <div class="col-sm-8 col-md-8">
-                <table class="table">
-                    <tr>
-                        <th scope="col">Scripture</th>
-                        <th scope="col">Verse Content</th>
-                        <th scope="col">Note Content</th>
-                    </tr>
-                    <?php
-                    //Each row is a note
-                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<tr>
-                        <td>" . $row["book_name"] . " " . $row["chapter"] . ":" . $row["verse"] ."</td>
-                        <td>" . $row["verse_content"] . "</td>
-                        <td>" . $row["note_content"] . "</td>
-                    </tr>";
-                    }
-                    ?>
-                </table>
+                <form action="page2.php" method="POST">
+                    <div class="form-group">
+                        <select name="book">
+                            <?php 
+                            while ($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<option value='" . $book["id"] . "'>" . 
+                                      $book["book_name"] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="number" name="chapter" placeholder="Chapter">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="number" name="verse" placeholder="Verse">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="verse_content" placeholder="Verse Content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="note_content" placeholder="Note Content"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Add</button>
+                </form>
             </div>
         </div>
     </div>

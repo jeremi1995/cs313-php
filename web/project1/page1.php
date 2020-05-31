@@ -1,9 +1,10 @@
 <?php
+
 /***********************************************************
  *   PROFILE INFO PAGE
-*    Notice: This page is only available to the users after
-*    signing in
-************************************************************/
+ *    Notice: This page is only available to the users after
+ *    signing in
+ ************************************************************/
 session_start();
 
 //database loading
@@ -14,8 +15,8 @@ $db = getDB();
 
 <?php
 /*********************************************************
-* PAGE HTML PRESENTATION
-**********************************************************/
+ * PAGE HTML PRESENTATION
+ **********************************************************/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +59,7 @@ $db = getDB();
                 <img src="../resource/project1/gold_plates.jpg" alt="" width="350" height="350">
             </div>
             <div class="col-sm-8 col-md-8">
+                <h2>Personal Information</h2>
                 <table class="table">
                     <tr>
                         <th scope="col">Username</th>
@@ -66,21 +68,21 @@ $db = getDB();
                         <th scope="col">Date of Birth</th>
                     </tr>
                     <tr>
-                        <td><?php echo $_SESSION["user_name"];?></td>
-                        <td><?php echo $_SESSION["first_name"];?></td>
-                        <td><?php echo $_SESSION["last_name"];?></td>
-                        <td><?php echo $_SESSION["date_of_birth"];?></td>
+                        <td><?php echo $_SESSION["user_name"]; ?></td>
+                        <td><?php echo $_SESSION["first_name"]; ?></td>
+                        <td><?php echo $_SESSION["last_name"]; ?></td>
+                        <td><?php echo $_SESSION["date_of_birth"]; ?></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 
-    <div class="container" id="pageFooter">
-        <footer>
-            <p>Copyright ©2020</p>
-        </footer>
-    </div>
+
+    <footer class="page-footer pt-4">
+        <div class="footer-copyright text-center py-3">Copyright ©2020</div>
+    </footer>
+
 
     <!--Bootstrap javascript files-->
     <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

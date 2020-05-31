@@ -1,8 +1,9 @@
 <?php
+
 /***********************************************************
  *   MAIN PAGE
-*    Available to all users
-************************************************************/
+ *    Available to all users
+ ************************************************************/
 session_start();
 
 //some variables
@@ -102,21 +103,19 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
                 <img src="../resource/project1/gold_plates.jpg" alt="" width="350" height="350">
             </div>
             <div class="col-sm-8 col-md-8">
-            <h2>Welcome to myScriptures!</h2>
+                <h2>Welcome to myScriptures!</h2>
                 <p>This is where you can create notes for your scriptures study</p>
                 <?php
                 if (!isset($_SESSION["user_name"]))
-                echo "<p>Please sign in using your username and password</p>"
+                    echo "<p>Please sign in using your username and password</p>"
                 ?>
             </div>
         </div>
     </div>
 
-    <div class="container" id="pageFooter">
-        <footer>
-            <p>Copyright ©2020</p>
-        </footer>
-    </div>
+    <footer class="page-footer pt-4">
+        <div class="footer-copyright text-center py-3">Copyright ©2020</div>
+    </footer>
 
     <!--Bootstrap javascript files-->
     <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

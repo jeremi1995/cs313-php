@@ -1,9 +1,10 @@
 <?php
+
 /***********************************************************
  *   DISPLAY NOTES PAGE
-*    Notice: This page is only available to the users after
-*    signing in
-************************************************************/
+ *    Notice: This page is only available to the users after
+ *    signing in
+ ************************************************************/
 session_start();
 
 //database loading
@@ -11,10 +12,26 @@ require "../db/database.php";
 $db = getDB();
 $user_id = $_SESSION["user_id"]; //This only works if the user logged in
 
+//If book, chapter, verse, verse_content, and note_content is receive,
+// initiate note adding sequence:
+if (
+    isset($_POST["book"]) && isset($_POST["chapter"])
+    && isset($_POST["verse"]) && isset($_POST["verse_content"])
+    && isset($_POST["note_content"])
+) {
+    $book = $_POST["book"];
+    $chapter = $_POST["chapter"];
+    $verse = $_POST["verse"];
+    $verse_content = $_POST["verse_content"];
+    $note_content = $_POST["note_content"];
+
+    require "addNote.php";
+}
+
 //Preparing all the notes from the current user
 $stmt = $db->prepare("SELECT n.id, user_id, book_id, volume, book_name, chapter, verse, verse_content, note_content 
-                             FROM note as n 
-                             JOIN book as b 
+                             FROM note as n
+                             JOIN book as b
                              ON n.book_id = b.id WHERE user_id =:ui");
 $stmt->bindValue(":ui", $user_id);
 $stmt->execute();
@@ -23,8 +40,8 @@ $stmt->execute();
 
 <?php
 /*********************************************************
-* PAGE HTML PRESENTATION
-**********************************************************/
+ * PAGE HTML PRESENTATION
+ **********************************************************/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,6 +84,7 @@ $stmt->execute();
                 <img src="../resource/project1/gold_plates.jpg" alt="" width="350" height="350">
             </div>
             <div class="col-sm-8 col-md-8">
+                <h2>Notes Created</h2>
                 <table class="table">
                     <tr>
                         <th scope="col">Scripture</th>
@@ -75,12 +93,12 @@ $stmt->execute();
                         <th scope="col">Options</th>
                     </tr>
                     <?php
-                    //Each row is a note
-                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    //Each row of the table is a note
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>
-                        <td id='bo_" . $row["id"]."'>" . $row["book_name"] . " " . $row["chapter"] . ":" . $row["verse"] ."</td>
-                        <td id='vc_" . $row["id"]."'>" . $row["verse_content"] . "</td>
-                        <td id='nc_" . $row["id"]."'>" . $row["note_content"] . "</td>
+                        <td id='bo_" . $row["id"] . "'>" . $row["book_name"] . " " . $row["chapter"] . ":" . $row["verse"] . "</td>
+                        <td id='vc_" . $row["id"] . "'>" . $row["verse_content"] . "</td>
+                        <td id='nc_" . $row["id"] . "'>" . $row["note_content"] . "</td>
                         <td>
                         <div id='edit_options_" . $row["id"] . "'>
                             <button class='btn btn-primary btn-sm' type='button' onclick='editNote(" . $row["id"] . ", 1)'>Edit</button>
@@ -95,11 +113,9 @@ $stmt->execute();
         </div>
     </div>
 
-    <div class="container" id="pageFooter">
-        <footer>
-            <p>Copyright ©2020</p>
-        </footer>
-    </div>
+    <footer class="page-footer pt-4">
+        <div class="footer-copyright text-center py-3">Copyright ©2020</div>
+    </footer>
 
     <script src="page2.js"></script>
     <!--Bootstrap javascript files-->
