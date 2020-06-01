@@ -7,6 +7,7 @@
 ************************************************************/
 session_start();
 
+if (isset($_SESSION["user_id"])) {
 $user_id = $_SESSION["user_id"];
 $noteID = $_POST["noteID"];
 
@@ -18,5 +19,9 @@ $stmt = $db->prepare("DELETE FROM note WHERE id=:ni AND user_id=:ui");
 $stmt->bindValue(":ni", $noteID);
 $stmt->bindValue(":ui", $user_id);
 $stmt->execute();
+}
+else {
+    echo "Permission Denied";
+}
 
 ?>

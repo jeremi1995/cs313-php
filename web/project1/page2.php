@@ -93,7 +93,7 @@ $stmt->execute();
                         <th scope="col">Options</th>
                     </tr>
                     <?php
-                    //Each row of the table is a note
+                    //Each row of the table is a note with editing and deleting options
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>
                         <td id='bo_" . $row["id"] . "'>" . $row["book_name"] . " " . $row["chapter"] . ":" . $row["verse"] . "</td>

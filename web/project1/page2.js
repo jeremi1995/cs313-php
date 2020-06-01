@@ -1,6 +1,5 @@
 
 function editNote(noteID, edit) {
-
     if (edit == 1) {
         console.log("editing");
 
