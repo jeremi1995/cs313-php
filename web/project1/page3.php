@@ -65,16 +65,6 @@ $stmt->execute();
             <div class="col-sm-8 col-md-8">
                 <form action="page2.php" method="POST">
                     <div class="form-group">
-                        <select name="book">
-                            <?php 
-                            while ($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                echo "<option value='" . $book["id"] . "'>" . 
-                                      $book["book_name"] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <input class="form-control" type="number" name="chapter" placeholder="Chapter">
                     </div>
                     <div class="form-group">
@@ -86,7 +76,7 @@ $stmt->execute();
                     <div class="form-group">
                         <textarea class="form-control" name="note_content" placeholder="Note Content"></textarea>
                     </div>
-                    <button class="btn btn-primary">Add</button>
+                    <button class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>

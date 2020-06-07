@@ -71,28 +71,33 @@ if (isset($_POST["log_out"]) && isset($_SESSION["user_name"])) {
             </ul>';
             }
             ?>
-            <?php
-            //If an user is in session, display login info on top right of the screen
-            // Otherwise, display log-in username and password fields
-            if (!isset($_SESSION["user_name"])) {
-                //If the provided username and password are incorrect, display
-                //  warning message
-                if ($loginError) {
-                    echo '<p class="text-danger">Incorrect username or password</p>';
-                }
-                echo '<form class="form-inline" action="main.php" method="POST">
-                       <input type="text" name="user_name" placeholder="Username" required>
-                       <input type="password" name="password" placeholder="Password" required>
-                       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log-in</button>
-                  </form>';
-            } else {
-                echo '<form class="form-inline" action="main.php" method="POST">
+            <div>
+                <?php
+                //If an user is in session, display login info on top right of the screen
+                // Otherwise, display log-in username and password fields
+                if (!isset($_SESSION["user_name"])) {
+                    //If the provided username and password are incorrect, display
+                    //  warning message
+                    if ($loginError) {
+                        echo '<p class="text-danger">Incorrect username or password</p>';
+                    }
+                    echo ' <form class="form-inline float-right" action="page4.php" method="POST">
+                               <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign-up</button>
+                           </form>
+                           <form class="form-inline float-right" action="main.php" method="POST">
+                               <input type="text" name="user_name" placeholder="Username" required>
+                               <input type="password" name="password" placeholder="Password" required>
+                               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log-in</button>
+                           </form>';
+                } else {
+                    echo '<form class="form-inline" action="main.php" method="POST">
                 Hello, ' . $_SESSION["first_name"] . " " . $_SESSION["last_name"] . '! <br>' .
-                    '<input type="hidden" name="log_out" value="true">
+                        '<input type="hidden" name="log_out" value="true">
                            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Log Out</button>
                       </form>';
-            }
-            ?>
+                }
+                ?>
+            </div>
         </div>
     </header>
 
