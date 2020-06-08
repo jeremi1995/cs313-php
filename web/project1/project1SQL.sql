@@ -44,7 +44,8 @@ INSERT INTO book (volume, book_name, number_of_chapter) VALUES ('Book of Mormon'
 
 ---------------------- Inserting data into users table: ------------------
 -- For now, we will just insert 1 user: John Doe: --
-INSERT INTO users (user_name, password, first_name, last_name, date_of_birth) VALUES ('testUserName', 'testPassword', 'John', 'Doe', '1980-01-01');
+INSERT INTO users (user_name, password, first_name, last_name, date_of_birth)
+       VALUES ('testUserName', 'testPassword', 'John', 'Doe', '1980-01-01');
 
 ---------------------- Inserting data into note table: ------------------
 INSERT INTO note (user_id, book_id, chapter, verse, verse_content, note_content) VALUES (2, 1, 3, 7, 'another scripture', 'another note');

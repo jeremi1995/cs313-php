@@ -3,5 +3,4 @@
 require "../db/database.php";
 $db = getDB();
 
-
 ?>
