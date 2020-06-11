@@ -69,6 +69,8 @@ function saveNote(noteID) {
         "onclick='editNote(" + noteID + "," + 1 + ")'>Edit</button>";
 }
 
+
+
 function deleteNote(noteID) {
     console.log(noteID);
 
@@ -83,6 +85,7 @@ function deleteNote(noteID) {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
+                location.replace("page2.php");
             }
         }
 
@@ -92,7 +95,5 @@ function deleteNote(noteID) {
         xhr.open("POST", "deleteNote.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send(POST_input);
-
-        location.replace("page2.php");
     }
 }
