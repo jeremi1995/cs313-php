@@ -1,11 +1,20 @@
 
+//These 2 variables hold the verse content and note content of the
+// note being edited before the editing happens.
+// If the edit goes through, these will be changed.
+// If it doesn't, these will be used to re-display the original note.
+let verse_content = "";
+let note_content = "";
+
 function editNote(noteID, edit) {
+
+    //If the edit button is clicked
     if (edit == 1) {
         console.log("editing");
 
-        let verse_content = document.getElementById("vc_" + noteID).innerHTML;
-        let note_content = document.getElementById("nc_" + noteID).innerHTML;
-
+        verse_content = document.getElementById("vc_" + noteID).innerHTML;
+        note_content = document.getElementById("nc_" + noteID).innerHTML;
+        
         document.getElementById("vc_" + noteID).innerHTML = "<textarea id='e_vc_" + noteID + "' rows='4' cols='40'>";
         document.getElementById("e_vc_" + noteID).value = verse_content;
 
@@ -19,11 +28,12 @@ function editNote(noteID, edit) {
             "onclick='editNote(" + noteID + "," + 0 + ")'>Cancel</button>";
     }
 
+    //If the cancel button is clicked
     else {
         console.log("cancel");
 
-        document.getElementById("vc_" + noteID).innerHTML = document.getElementById("e_vc_" + noteID).value;
-        document.getElementById("nc_" + noteID).innerHTML = document.getElementById("e_nc_" + noteID).value;
+        document.getElementById("vc_" + noteID).innerHTML = verse_content; //Set the html element back to the original value
+        document.getElementById("nc_" + noteID).innerHTML = note_content; //Set the html element back to the original value
         document.getElementById("edit_options_" + noteID).innerHTML =
             "<button class='btn btn-primary btn-sm' type='button' " +
             "onclick='editNote(" + noteID + "," + 1 + ")'>Edit</button>";
