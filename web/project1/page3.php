@@ -1,9 +1,10 @@
 <?php
+
 /***********************************************************
-*    ADD NOTES PAGE
-*    - Notice: This page is only available to the users after
-*    signing in
-************************************************************/
+ *    ADD NOTES PAGE
+ *    - Notice: This page is only available to the users after
+ *    signing in
+ ************************************************************/
 session_start();
 
 //database loading
@@ -19,8 +20,8 @@ $stmt->execute();
 
 <?php
 /*********************************************************
-* PAGE HTML PRESENTATION
-**********************************************************/
+ * PAGE HTML PRESENTATION
+ **********************************************************/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,6 +65,16 @@ $stmt->execute();
             </div>
             <div class="col-sm-8 col-md-8">
                 <form action="page2.php" method="POST">
+                    <div class="form-group">
+                        <select name="book">
+                            <?php
+                            while ($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<option value='" . $book["id"] . "'>" .
+                                    $book["book_name"] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <input class="form-control" type="number" name="chapter" placeholder="Chapter">
                     </div>
